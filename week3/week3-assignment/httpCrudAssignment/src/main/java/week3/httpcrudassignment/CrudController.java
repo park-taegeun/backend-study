@@ -100,7 +100,7 @@ public class CrudController {
         /*
         * @PathVariable Long id: URL에 저장되어 있는 변수 {id}를 자바 변수 id로 가져옴
         * */
-        store.remove(id); // Map에서 키에 해당하는 값을 삭제함
+        store.remove(id); // Map에서 키에 해당하는 값을 삭제함 === 리소스 삭제
         return "Deleted item with id: " + id;
     }
 }
