@@ -1,0 +1,78 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.10'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'week4'
+version = '0.0.1-SNAPSHOT'
+description = 'springPractice'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // Spring MVC + 내장 톰캣 + REST API 등 웹 관련 기능 제공
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Data JPA: ORM 기반 DB 연동 (Entity, Repository 등)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Swagger (API 문서): API 문서를 자동 생성해주는 springdoc-openapi
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.1'
+
+    // Lombok: getter/setter, 생성자 등 자동 생 (캄파일 시점에만 필요)
+    compileOnly 'org.projectlombok:lombok'
+
+    // Lombok이 코드 자동 생성을 처리할 수 있도록 해주는 annotationProcessor
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // MySQL DB 접속을 위한 드라이버
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+
+    // JWT
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+
+    // S3
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+    // Spring AI
+    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
